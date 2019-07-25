@@ -1,0 +1,43 @@
+{% extends "hello.html" %}
+
+{% block content %}
+	<div class="container">
+
+		{% for user in users %}
+			<p>
+				{# special loop variables #}
+				{# index, index0, revindex, revindex0, length, first, last #}
+				{# concatenation operator => "~ " #}
+				{{ loop.index0 ~ ' --- ' ~ loop.first }} --- {{ cycle(['A', 'B', 'C'], loop.revindex) }} --- {{loop.last}}
+				{# Accessing loop variables of parent loop => loop.parent.loop.index0 #}
+				<br>
+				{{ user.name }} is {{ user.age }} years old.
+				<br>
+				{# Since user.ph-no (doesn't work), use attribute function or nested array call (user['ph-no']) #}
+				Phone No: {{ attribute(user, 'ph-no') }}
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				Gender:
+				{% if user.name != "Eve" %}
+					male
+				{% else %}
+					female
+				{% endif %}
+			</p>
+		{% endfor %}
+
+		<br><hr style="height: 20px;"><br>
+
+		<p> This is a sample of md5 filter {{ 'sample' | md5 }}
+		</p>
+
+	</div>
+{% endblock content %}
+
+{% block notice %}
+	<div class="container">
+		{# Call the parent notice block #}
+		{{ parent() }}
+		<h1> Notice from Child! </h1>
+		<p> This is important for crew to learn and grow! </p>
+	</div>
+{% endblock notice %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+	<head>
+		{% include "header.html" %}
+	</head>
+
+	<body>
+
+		<br><br><hr><br><br>
+
+		<div class="container">
+
+			Hey {{ name }}. You are awesome and {{ age }} years old!
+			{% if name == "Saraansh" and age > 15 %}
+				<br> This is definitely Saraansh!
+				<br>
+			{% endif %}
+
+		</div>
+
+		<br><hr style="height: 20px;"><br>
+
+		{% block content %}{% endblock %}
+
+		{% block notice %}
+			<h1> Notice from Parent! </h1>
+			<p> Nevermind! </p>
+		{% endblock %}
+
+		{# To combine the functionality of "include" and "extends", use "embed" #}
+		{# Study embed here => https://youtu.be/soc8ieCZR8E #}
+
+	</body>
+
+</html>
