@@ -9,15 +9,31 @@ $loader = new Twig_Loader_Filesystem('views');
 // Create a new twig instance
 // A twig environment needs a loader
 // There can be multiple loaders and you can also create your own
-$twig = new Twig_Environment($loader);
+$twig = new Twig_Environment($loader, [
+	'debug' => true
+]);
+
+// Add extension to dump object data
+// Call as {{dump(obj)}} | var_dump is called in the background
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 
 // Creating a Twig filter
 $md5filter = new Twig_SimpleFilter('md5', function($string) {
 	return md5($string);
 });
 
+$dumpfilter = new Twig_SimpleFilter('dump', function($val) {
+	var_dump($val);
+});
+
+$jsonfilter = new Twig_SimpleFilter('json', function($json_str){
+	return json_decode($json_str);
+});
+
 // Add the filter to twig instance
 $twig->addFilter($md5filter);
+$twig->addFilter($dumpfilter);
+$twig->addFilter($jsonfilter);
 
 // // To edit the syntax for blocks and tags in twig
 // // Create a twig lexer

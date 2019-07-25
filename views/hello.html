@@ -23,10 +23,13 @@
 
 		{% block content %}{% endblock %}
 
+		{% block json_decoder %}
+		{% endblock json_decoder %}
+
 		{% block notice %}
 			<h1> Notice from Parent! </h1>
 			<p> Nevermind! </p>
-		{% endblock %}
+		{% endblock notice %}
 
 		{# To combine the functionality of "include" and "extends", use "embed" #}
 		{# Study embed here => https://youtu.be/soc8ieCZR8E #}
